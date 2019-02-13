@@ -17,6 +17,10 @@ public class Money {
         return Money.ValueOf(value + amountToAdd.getValue());
     }
 
+    Money substract(Money amountToSubstract) {
+        return Money.ValueOf(value - amountToSubstract.getValue());
+    }
+
     private int getValue() {
         return value;
     }

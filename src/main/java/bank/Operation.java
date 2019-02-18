@@ -1,12 +1,12 @@
-package Bank;
+package bank;
 
 import java.util.Date;
 
 class Operation {
-    private OperationType type;
-    private Date date;
-    private Money amount;
-    private Money balanceAfterOperation;
+    private final OperationType type;
+    private final Date date;
+    private final Money amount;
+    private final Money balanceAfterOperation;
 
     Operation(OperationType type, Date date, Money amount, Money balanceAfterOperation) {
         this.type = type;

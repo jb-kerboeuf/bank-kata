@@ -1,6 +1,6 @@
-import Bank.Account;
-import Bank.Client;
-import Bank.Money;
+import bank.Account;
+import bank.Client;
+import bank.Money;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,16 +11,16 @@ public class BankTest {
     public void US1_AClientMakesADeposit() {
         Client client = new Client("1");
         Account account = new Account(client);
-        account.deposit(Money.ValueOf(1000), new Date());
-        Assert.assertEquals(Money.ValueOf(1000), account.getBalance());
+        account.deposit(Money.valueOf(1000), new Date());
+        Assert.assertEquals(Money.valueOf(1000), account.getBalance());
     }
 
     @Test
     public void US2_AClientMakesAWithdrawal() {
         Client client = new Client("1");
-        Account account = new Account(client, Money.ValueOf(1000));
-        account.withdrawal(Money.ValueOf(200), new Date());
-        Assert.assertEquals(Money.ValueOf(800), account.getBalance());
+        Account account = new Account(client, Money.valueOf(1000));
+        account.withdrawal(Money.valueOf(200), new Date());
+        Assert.assertEquals(Money.valueOf(800), account.getBalance());
     }
 
     @Test
@@ -29,16 +29,16 @@ public class BankTest {
         Account account = new Account(client);
 
         Date firstOperationDate = new Date();
-        account.deposit(Money.ValueOf(1000), firstOperationDate);
+        account.deposit(Money.valueOf(1000), firstOperationDate);
         Date secondOperationDate = new Date();
-        account.withdrawal(Money.ValueOf(600), secondOperationDate);
+        account.withdrawal(Money.valueOf(600), secondOperationDate);
         Date thirdOperationDate = new Date();
-        account.deposit(Money.ValueOf(800), thirdOperationDate);
+        account.deposit(Money.valueOf(800), thirdOperationDate);
 
         String expectedStatement = String.format(
-                "Operation: Deposit | Date: %s | Amount: 1000 | Balance: 1000\n" +
-                        "Operation: Withdrawal | Date: %s | Amount: 600 | Balance: 400\n" +
-                        "Operation: Deposit | Date: %s | Amount: 800 | Balance: 1200"
+                "Operation: DEPOSIT | Date: %s | Amount: 1000.0 | Balance: 1000.0\n" +
+                        "Operation: WITHDRAWAL | Date: %s | Amount: 600.0 | Balance: 400.0\n" +
+                        "Operation: DEPOSIT | Date: %s | Amount: 800.0 | Balance: 1200.0"
                 , firstOperationDate, secondOperationDate, thirdOperationDate);
         Assert.assertEquals(expectedStatement, account.getStatement());
     }
@@ -48,8 +48,18 @@ public class BankTest {
         Client client = new Client("1");
         Account account = new Account(client);
         Date depositDate = new Date();
-        account.deposit(Money.ValueOf(1000), depositDate);
-        String expectedStatement = String.format("Operation: Deposit | Date: %s | Amount: 1000 | Balance: 1000", depositDate);
+        account.deposit(Money.valueOf(1000), depositDate);
+        String expectedStatement = String.format("Operation: DEPOSIT | Date: %s | Amount: 1000.0 | Balance: 1000.0", depositDate);
+        Assert.assertEquals(expectedStatement, account.getStatement());
+    }
+
+    @Test
+    public void UnitTest_AccountBalanceGoesNegative() {
+        Client client = new Client("1");
+        Account account = new Account(client);
+        Date date = new Date();
+        account.withdrawal(Money.valueOf(1000), date);
+        String expectedStatement = String.format("Operation: WITHDRAWAL | Date: %s | Amount: 1000.0 | Balance: -1000.0", date);
         Assert.assertEquals(expectedStatement, account.getStatement());
     }
 }

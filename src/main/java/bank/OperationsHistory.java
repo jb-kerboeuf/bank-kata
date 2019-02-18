@@ -1,4 +1,4 @@
-package Bank;
+package bank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +11,11 @@ class OperationsHistory {
     }
 
     String generateStatement() {
-        String statement = "";
+        StringBuilder statement = new StringBuilder();
         for (Operation operation : operations) {
-            statement += operation.generateStatement();
-            ;
+            statement.append(operation.generateStatement());
         }
-        return statement.trim();
+        return statement.toString().trim();
     }
 
     void add(Operation operation) {

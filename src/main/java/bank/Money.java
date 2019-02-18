@@ -1,27 +1,27 @@
-package Bank;
+package bank;
 
 import java.util.Objects;
 
 public class Money {
-    private final int value;
+    private final double value;
 
-    private Money(int value) {
+    private Money(double value) {
         this.value = value;
     }
 
-    public static Money ValueOf(int value) {
+    public static Money valueOf(double value) {
         return new Money(value);
     }
 
     Money add(Money amountToAdd) {
-        return Money.ValueOf(value + amountToAdd.getValue());
+        return Money.valueOf(value + amountToAdd.getValue());
     }
 
-    Money substract(Money amountToSubstract) {
-        return Money.ValueOf(value - amountToSubstract.getValue());
+    Money subtract(Money amountToSubtract) {
+        return Money.valueOf(value - amountToSubtract.getValue());
     }
 
-    private int getValue() {
+    private double getValue() {
         return value;
     }
 

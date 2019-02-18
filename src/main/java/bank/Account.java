@@ -1,4 +1,4 @@
-package Bank;
+package bank;
 
 import java.util.Date;
 
@@ -8,7 +8,7 @@ public class Account {
     private OperationsHistory operationsHistory;
 
     public Account(Client client) {
-        this(client, Money.ValueOf(0));
+        this(client, Money.valueOf(0));
     }
 
     public Account(Client client, Money initialDeposit) {
@@ -20,13 +20,13 @@ public class Account {
     public void deposit(Money amount, Date date) {
         Money newBalance = balance.add(amount);
         balance = newBalance;
-        operationsHistory.add(new Operation(OperationType.Deposit, date, amount, newBalance));
+        operationsHistory.add(new Operation(OperationType.DEPOSIT, date, amount, newBalance));
     }
 
     public void withdrawal(Money amount, Date date) {
-        Money newBalance = balance.substract(amount);
-        balance = balance.substract(amount);
-        operationsHistory.add(new Operation(OperationType.Withdrawal, date, amount, newBalance));
+        Money newBalance = balance.subtract(amount);
+        balance = newBalance;
+        operationsHistory.add(new Operation(OperationType.WITHDRAWAL, date, amount, newBalance));
     }
 
     public Money getBalance() {

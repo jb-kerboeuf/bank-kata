@@ -15,8 +15,19 @@ class Operation {
         this.balanceAfterOperation = balanceAfterOperation;
     }
 
-    String generateStatement() {
-        String template = "Operation: %s | Date: %s | Amount: %s | Balance: %s\n";
-        return String.format(template, type, date, amount, balanceAfterOperation);
+    OperationType getType() {
+        return type;
+    }
+
+    Date getDate() {
+        return date;
+    }
+
+    Money getAmount() {
+        return amount;
+    }
+
+    Money getBalanceAfterOperation() {
+        return balanceAfterOperation;
     }
 }
